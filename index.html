@@ -7,166 +7,142 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#29A8E0;--navy:#1a2e3b;--green:#2DAE68;--red:#EF4444;--bg:#F4F7FB;--card:#fff;--text:#1F2937;--sub:#6B7280;--border:#E5E7EB}
-html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-.phone{max-width:390px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;position:relative;background:var(--bg);overflow:hidden}
-
-/* 상태바 */
+:root{--blue:#29A8E0;--navy:#1a2e3b;--green:#2DAE68;--red:#EF4444;--amber:#F59E0B;--bg:#F4F7FB;--card:#fff;--text:#1F2937;--sub:#6B7280;--border:#E5E7EB}
+html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:#e8ecf0;color:var(--text);-webkit-font-smoothing:antialiased}
+.phone{max-width:390px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);overflow:hidden;position:relative;box-shadow:0 0 40px rgba(0,0,0,.2)}
 .status-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px 4px;background:var(--card);font-size:12px;font-weight:700;flex-shrink:0}
 .status-right{display:flex;gap:6px;align-items:center}
-.battery{width:22px;height:11px;border:1.5px solid var(--text);border-radius:2px;position:relative;display:flex;align-items:center;padding:1.5px}
-.battery::after{content:'';position:absolute;right:-4px;top:50%;transform:translateY(-50%);width:3px;height:5px;background:var(--text);border-radius:0 1px 1px 0}
-.battery-fill{height:100%;background:var(--text);border-radius:1px;width:90%}
-
-/* 헤더 */
-.header{background:var(--card);padding:12px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-shrink:0}
-.header-back{width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;background:var(--bg)}
-.header h1{font-size:17px;font-weight:700;flex:1}
-
-/* 스크린 컨테이너 */
+.header{background:var(--card);padding:12px 20px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-shrink:0;min-height:56px}
+.back-btn{width:32px;height:32px;border:none;background:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s}
+.back-btn:hover{background:#e0e7ef}
+.header h1{font-size:17px;font-weight:700;flex:1;text-align:center}
+.header-right{width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-bar{background:var(--card);padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+.step-label{font-size:11px;color:var(--sub);margin-bottom:6px;font-weight:600}
+.step-track{height:4px;background:#E5E7EB;border-radius:2px;overflow:hidden}
+.step-fill{height:100%;border-radius:2px;background:var(--blue);transition:width .5s}
 .screens{flex:1;overflow:hidden;position:relative}
-.screen{position:absolute;inset:0;overflow-y:auto;padding:0 0 80px;display:none;flex-direction:column}
+.screen{position:absolute;inset:0;overflow-y:auto;padding-bottom:74px;display:none;flex-direction:column;-webkit-overflow-scrolling:touch}
 .screen.active{display:flex}
-
-/* 하단 탭바 */
-.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:var(--card);border-top:1px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom,0);z-index:100}
+.tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:390px;background:var(--card);border-top:1px solid var(--border);display:flex;padding-bottom:env(safe-area-inset-bottom,0px);z-index:200}
 .tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;gap:3px;cursor:pointer;font-size:10px;color:var(--sub);font-weight:500}
 .tab.active{color:var(--blue)}
 .tab svg{width:22px;height:22px}
-
-/* 카드 */
-.card{background:var(--card);border-radius:16px;box-shadow:0 2px 12px rgba(26,46,59,0.07);margin:12px 16px 0}
-.card-pad{padding:18px}
-.card-title{font-size:13px;font-weight:700;color:var(--sub);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
-
-/* 홈 M1 */
+/* 홈 */
 .greeting{padding:20px 20px 0;font-size:22px;font-weight:900;line-height:1.35}
 .greeting span{color:var(--blue)}
 .insurance-row{display:flex;gap:8px;padding:12px 16px 0}
-.ins-card{flex:1;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(26,46,59,0.06)}
+.ins-card{flex:1;background:var(--card);border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(26,46,59,.06)}
 .ins-badge{font-size:10px;font-weight:700;color:var(--green);background:#DCFCE7;padding:2px 8px;border-radius:99px;display:inline-block;margin-bottom:6px}
-.ins-title{font-size:12px;font-weight:700;color:var(--text);line-height:1.4}
+.ins-title{font-size:12px;font-weight:700;color:var(--text)}
 .discount-card{background:linear-gradient(135deg,var(--navy),#2d4a61);color:#fff;border-radius:16px;margin:12px 16px 0;padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
 .discount-num{font-size:28px;font-weight:900;color:#29A8E0}
 .discount-label{font-size:12px;opacity:.8;margin-top:2px}
-.claim-btn{margin:14px 16px 0;background:var(--blue);color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:700;width:calc(100% - 32px);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
-.claim-btn svg{width:20px;height:20px}
+.claim-btn{margin:14px 16px 0;background:var(--blue);color:#fff;border:none;border-radius:14px;padding:16px;font-size:16px;font-weight:700;width:calc(100% - 32px);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:transform .1s}
+.claim-btn:active{transform:scale(.98)}
 .claim-sub{font-size:11px;font-weight:400;opacity:.85}
-.history-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
+/* 카드 */
+.m-card{background:var(--card);border-radius:16px;box-shadow:0 2px 12px rgba(26,46,59,.07);margin:12px 16px 0}
+.card-pad{padding:18px}
+.card-title{font-size:12px;font-weight:700;color:var(--sub);margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.history-item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
 .history-item:last-child{border-bottom:none}
+.history-item:active{background:#f0f4f8}
 .type-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
-.type-a{background:#FEF3C7;color:#92400E}
-.type-b{background:#FEE2E2;color:#991B1B}
-.type-c{background:#DCFCE7;color:#166534}
+.badge-a{background:#FEF3C7;color:#92400E}
+.badge-b{background:#FEE2E2;color:#991B1B}
+.badge-c{background:#DCFCE7;color:#166534}
 .history-info{flex:1;min-width:0}
 .history-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .history-sub{font-size:11px;color:var(--sub);margin-top:2px}
-.history-amount{font-size:13px;font-weight:700;color:var(--navy);text-align:right}
-
-/* STEP 표시 */
-.step-bar{background:var(--card);padding:14px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
-.step-label{font-size:11px;color:var(--sub);margin-bottom:6px;font-weight:600}
-.step-track{height:4px;background:#E5E7EB;border-radius:2px}
-.step-fill{height:100%;border-radius:2px;background:var(--blue);transition:width .4s}
-
-/* 업로드 M2 */
+.history-amount{font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+/* 업로드 */
 .form-section{padding:16px 16px 0}
 .form-label{font-size:13px;font-weight:700;margin-bottom:8px;display:block}
-.location-row{display:flex;gap:8px;margin-bottom:12px}
-.loc-chip{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:10px 8px;text-align:center;font-size:13px;font-weight:500;cursor:pointer;background:var(--card);transition:all .2s}
+.location-row{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.loc-chip{border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:500;cursor:pointer;background:var(--card);transition:all .15s}
 .loc-chip.selected{border-color:var(--blue);background:#EFF9FF;color:var(--blue);font-weight:700}
-.damage-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.d-chip{border:1.5px solid var(--border);border-radius:99px;padding:7px 14px;font-size:12px;font-weight:500;cursor:pointer;background:var(--card);transition:all .2s}
+.damage-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.d-chip{border:1.5px solid var(--border);border-radius:99px;padding:7px 14px;font-size:12px;font-weight:500;cursor:pointer;background:var(--card);transition:all .15s}
 .d-chip.selected{border-color:var(--blue);background:#EFF9FF;color:var(--blue)}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
-.photo-slot{aspect-ratio:1;background:#F4F7FB;border:1.5px dashed var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;font-size:11px;color:var(--sub)}
-.photo-slot.filled{border:none;position:relative;overflow:hidden}
-.photo-slot.filled img{width:100%;height:100%;object-fit:cover}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px}
+.photo-slot{aspect-ratio:1;background:#F4F7FB;border:1.5px dashed var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;font-size:11px;color:var(--sub);overflow:hidden}
+.photo-slot.filled{border:none;font-size:28px;background:#dce8f2}
 .photo-count{font-size:11px;color:var(--sub);margin-bottom:4px}
-.tip-box{background:#EFF9FF;border-radius:10px;padding:10px 12px;font-size:11px;color:#1d6fa8;line-height:1.6;margin-bottom:12px}
-.next-btn{margin:16px;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;width:calc(100% - 32px);cursor:pointer}
-.next-btn:disabled{background:#B0D9F0;cursor:default}
-
-/* 분석 중 M3 */
+.tip-box{background:#EFF9FF;border-radius:10px;padding:10px 12px;font-size:11px;color:#1d6fa8;line-height:1.6;margin-bottom:8px}
+.next-btn{margin:12px 16px;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;width:calc(100% - 32px);cursor:pointer;transition:transform .1s}
+.next-btn:active{transform:scale(.98)}
+.next-btn.secondary{background:var(--bg);color:var(--navy);border:1.5px solid var(--border)}
+.next-btn.green{background:var(--green)}
+.next-btn.red-light{background:#FEF2F2;color:var(--red);border:none}
+/* 분석 */
 .analyzing-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:20px}
-.ai-orb{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--navy));display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 12px rgba(41,168,224,.12),0 0 0 24px rgba(41,168,224,.06);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 12px rgba(41,168,224,.12),0 0 0 24px rgba(41,168,224,.06)}50%{box-shadow:0 0 0 16px rgba(41,168,224,.18),0 0 0 32px rgba(41,168,224,.08)}}
-.ai-orb svg{width:44px;height:44px}
-.analyzing-title{font-size:20px;font-weight:900;text-align:center}
-.analyzing-sub{font-size:13px;color:var(--sub);text-align:center}
+.ai-orb{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--navy));display:flex;align-items:center;justify-content:center;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 10px rgba(41,168,224,.12),0 0 0 22px rgba(41,168,224,.05)}50%{box-shadow:0 0 0 16px rgba(41,168,224,.18),0 0 0 32px rgba(41,168,224,.08)}}
 .prog-wrap{width:100%;max-width:280px}
 .prog-track{height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .6s ease}
+.prog-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .4s ease}
 .prog-label{font-size:12px;color:var(--blue);font-weight:700;text-align:right;margin-bottom:4px}
 .checklist{width:100%;max-width:300px;display:flex;flex-direction:column;gap:10px}
 .check-item{display:flex;align-items:center;gap:10px;font-size:13px}
-.check-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px}
-.check-done{background:var(--green);color:#fff}
-.check-pending{background:#E5E7EB;color:var(--sub)}
-.check-active{background:var(--blue);color:#fff;animation:blink .8s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
-
-/* 결과 M4 */
+.check-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:700}
+.c-done{background:var(--green);color:#fff}
+.c-pending{background:#E5E7EB;color:var(--sub);font-size:10px}
+.c-active{background:var(--blue);color:#fff}
+/* 결과 */
 .result-header{padding:20px 20px 0;text-align:center}
 .result-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:28px}
-.result-a-icon{background:#FEF3C7}
-.result-c-icon{background:#DCFCE7}
 .result-title{font-size:20px;font-weight:900;margin-bottom:4px}
 .result-sub{font-size:13px;color:var(--sub)}
 .confidence{display:inline-block;background:#EFF9FF;color:var(--blue);font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;margin-top:6px}
-.reason-row{display:flex;gap:8px;align-items:flex-start}
-.reason-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);margin-top:5px;flex-shrink:0}
-.reason-text{font-size:13px;color:var(--text);line-height:1.6}
-.action-btn{width:100%;border:none;border-radius:12px;padding:14px;font-size:14px;font-weight:700;cursor:pointer;margin-top:8px}
-.action-primary{background:var(--blue);color:#fff}
-.action-secondary{background:var(--bg);color:var(--navy);border:1.5px solid var(--border)!important}
+.reason-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px}
+.reason-dot{width:5px;height:5px;border-radius:50%;background:var(--blue);margin-top:6px;flex-shrink:0}
+.reason-text{font-size:13px;line-height:1.6}
 .amount-big{font-size:36px;font-weight:900;color:var(--navy);text-align:center;padding:16px 0 0}
-.amount-sub{font-size:12px;color:var(--sub);text-align:center;margin-top:2px}
 .time-badge{display:inline-flex;align-items:center;gap:4px;background:var(--bg);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--green);margin-top:6px}
-.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
-.breakdown-row:last-of-type{border-bottom:none}
-.breakdown-total{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;font-size:15px;font-weight:700}
-.deduct{color:var(--red)}
+.row-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.row-line:last-of-type{border-bottom:none}
 .saving-banner{background:#DCFCE7;border-radius:10px;padding:10px 14px;font-size:12px;color:#166534;font-weight:600;margin-top:8px;display:flex;justify-content:space-between}
-
-/* 완료 M7 */
-.complete-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:16px;text-align:center}
-.complete-circle{width:80px;height:80px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:8px}
-.complete-amount{font-size:38px;font-weight:900;color:var(--navy)}
-.complete-label{font-size:14px;color:var(--sub)}
-.info-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;width:100%;max-width:300px}
+.deduct{color:var(--red)}
+/* 완료 */
+.complete-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;gap:14px;text-align:center}
+.complete-circle{width:80px;height:80px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.info-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px;width:100%;max-width:300px}
 .info-row:last-of-type{border-bottom:none}
-.info-label{color:var(--sub)}
-.info-value{font-weight:700}
-.home-btn{background:var(--navy);color:#fff;border:none;border-radius:12px;padding:15px 40px;font-size:15px;font-weight:700;cursor:pointer;margin-top:16px}
+/* 토스트 */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(26,46,59,.92);color:#fff;font-size:13px;font-weight:600;padding:10px 20px;border-radius:99px;z-index:1000;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+/* 내역 탭 */
+.history-screen{display:flex;flex-direction:column}
 </style>
 </head>
 <body>
 <div class="phone">
   <!-- 상태바 -->
-  <div class="status-bar" id="statusBar">
-    <span>9:41</span>
+  <div class="status-bar">
+    <span id="clock">9:41</span>
     <div class="status-right">
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="3" width="3" height="9" rx="1" fill="#1F2937"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#1F2937"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#1F2937"/><rect x="13.5" y="1" width="2.5" height="4" rx="0.5" fill="#D1D5DB"/></svg>
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M8 2.5C10.5 2.5 12.7 3.6 14.2 5.3L15.5 4C13.6 1.9 11 .5 8 .5S2.4 1.9.5 4l1.3 1.3C3.3 3.6 5.5 2.5 8 2.5z" fill="#1F2937"/><path d="M8 5.5C9.8 5.5 11.4 6.3 12.5 7.5l1.3-1.3C12.3 4.7 10.3 3.5 8 3.5S3.7 4.7 2.2 6.2l1.3 1.3C4.6 6.3 6.2 5.5 8 5.5z" fill="#1F2937"/><circle cx="8" cy="10" r="1.5" fill="#1F2937"/></svg>
-      <div class="battery"><div class="battery-fill"></div></div>
-      <span>100%</span>
+      <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="3" width="2.5" height="8" rx="1" fill="#1F2937"/><rect x="4" y="2" width="2.5" height="9" rx="1" fill="#1F2937"/><rect x="8" y="0" width="2.5" height="11" rx="1" fill="#1F2937"/><rect x="12" y="0" width="3" height="4" rx="1" fill="#D1D5DB"/></svg>
+      <svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2.5C9.5 2.5 11.3 3.4 12.6 4.8L14 3.5C12.3 1.7 9.9.5 7.5.5S2.7 1.7 1 3.5l1.4 1.3C3.7 3.4 5.5 2.5 7.5 2.5z" fill="#1F2937"/><path d="M7.5 5.5c1.4 0 2.7.6 3.6 1.5l1.4-1.3C11.2 4.3 9.5 3.5 7.5 3.5S3.8 4.3 2.5 5.7l1.4 1.3C4.8 6.1 6.1 5.5 7.5 5.5z" fill="#1F2937"/><circle cx="7.5" cy="9.5" r="1.5" fill="#1F2937"/></svg>
+      <span style="font-size:11px;font-weight:700">100%</span>
     </div>
   </div>
 
-  <!-- 헤더 (동적) -->
+  <!-- 헤더 -->
   <div class="header" id="mainHeader">
-    <div style="width:32px"></div>
+    <button class="back-btn" id="backBtn" onclick="goBack()" style="visibility:hidden">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="#1F2937" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <h1 id="headerTitle">아파트집사 보험</h1>
-    <div style="width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z" fill="white"/></svg>
+    <div class="header-right">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm0 2c-2.7 0-8 1.3-8 4v2h16v-2c0-2.7-5.3-4-8-4z" fill="white"/></svg>
     </div>
   </div>
 
-  <!-- STEP 바 (동적) -->
+  <!-- STEP 바 -->
   <div class="step-bar" id="stepBar" style="display:none">
-    <div class="step-label" id="stepLabel">STEP 2 / 4 — 피해 사진 등록</div>
-    <div class="step-track"><div class="step-fill" id="stepFill" style="width:50%"></div></div>
+    <div class="step-label" id="stepLabel"></div>
+    <div class="step-track"><div class="step-fill" id="stepFill"></div></div>
   </div>
 
   <!-- 스크린들 -->
@@ -182,40 +158,47 @@ html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:var(-
         </div>
         <div class="ins-card">
           <div class="ins-badge">가입 완료</div>
-          <div class="ins-title">영업배상책임보험</div>
+          <div class="ins-title">영업배상책임</div>
         </div>
       </div>
       <div class="discount-card">
         <div>
-          <div style="font-size:12px;opacity:.7;margin-bottom:4px">안전점검 보험료 할인</div>
+          <div style="font-size:11px;opacity:.7;margin-bottom:3px">안전점검 보험료 할인</div>
           <div class="discount-num">-15%</div>
           <div class="discount-label">아파트집사 연동 적용 중</div>
         </div>
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="rgba(41,168,224,.2)"/><path d="M24 14l2.4 7.4H34l-6.2 4.5 2.4 7.4L24 29l-6.2 4.3 2.4-7.4L14 21.4h7.6z" fill="#29A8E0"/></svg>
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="18" fill="rgba(41,168,224,.2)"/><path d="M22 13l2.2 6.8H31l-5.6 4.1 2.2 6.8L22 26.5l-5.6 4.2 2.2-6.8L13 19.8h6.8z" fill="#29A8E0"/></svg>
       </div>
-      <button class="claim-btn" onclick="goScreen('s-upload')">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V8M12 8l-3 3M12 8l3 3" stroke="white" stroke-width="2" stroke-linecap="round"/><path d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
-        보험금 청구하기
-        <div class="claim-sub">사진 촬영 → AI 분류 → 결과 안내</div>
+      <button class="claim-btn" onclick="nav('s-upload')">
+        <span style="font-size:16px;font-weight:700">보험금 청구하기</span>
+        <span class="claim-sub">사진 촬영 → AI 분류 → 결과 안내</span>
       </button>
-      <div class="card">
+      <div class="m-card">
         <div class="card-pad">
           <div class="card-title">최근 청구 내역</div>
-          <div class="history-item">
-            <span class="type-badge type-c">TYPE C</span>
+          <div class="history-item" onclick="nav('s-detail')">
+            <span class="type-badge badge-c">TYPE C</span>
             <div class="history-info">
               <div class="history-title">거실 천장 누수</div>
               <div class="history-sub">2026-03-14 · 완료</div>
             </div>
             <div class="history-amount" style="color:var(--green)">607,850원<br><span style="font-size:10px;color:var(--sub)">지급 완료</span></div>
           </div>
-          <div class="history-item">
-            <span class="type-badge type-b">TYPE B</span>
+          <div class="history-item" onclick="nav('s-result-ab')">
+            <span class="type-badge badge-b">TYPE B</span>
             <div class="history-info">
               <div class="history-title">창문 파손</div>
               <div class="history-sub">2026-02-28 · 완료</div>
             </div>
-            <div class="history-amount" style="font-size:11px;color:var(--sub);font-weight:500">면책 처리<br>의견서 수령</div>
+            <div class="history-amount" style="font-size:11px;color:var(--sub)">면책 처리<br>의견서 수령</div>
+          </div>
+          <div class="history-item" onclick="nav('s-result-a')">
+            <span class="type-badge badge-a">TYPE A</span>
+            <div class="history-info">
+              <div class="history-title">외벽 균열 (확인 중)</div>
+              <div class="history-sub">2026-01-20 · 소송 진행 중</div>
+            </div>
+            <div class="history-amount" style="font-size:11px;color:var(--amber)">소송 이관</div>
           </div>
         </div>
       </div>
@@ -226,246 +209,414 @@ html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:var(-
       <div class="form-section">
         <label class="form-label">발생 위치</label>
         <div class="location-row">
-          <div class="loc-chip selected" onclick="selectLoc(this)">거실</div>
-          <div class="loc-chip" onclick="selectLoc(this)">주방</div>
-          <div class="loc-chip" onclick="selectLoc(this)">침실</div>
-          <div class="loc-chip" onclick="selectLoc(this)">욕실</div>
-          <div class="loc-chip" onclick="selectLoc(this)">외부</div>
+          <div class="loc-chip selected" onclick="toggleLoc(this)">거실</div>
+          <div class="loc-chip" onclick="toggleLoc(this)">주방</div>
+          <div class="loc-chip" onclick="toggleLoc(this)">침실</div>
+          <div class="loc-chip" onclick="toggleLoc(this)">욕실</div>
+          <div class="loc-chip" onclick="toggleLoc(this)">외부</div>
         </div>
         <label class="form-label">피해 유형</label>
         <div class="damage-chips">
-          <div class="d-chip selected" onclick="selectChip(this)">누수</div>
-          <div class="d-chip" onclick="selectChip(this)">균열</div>
-          <div class="d-chip" onclick="selectChip(this)">파손</div>
-          <div class="d-chip" onclick="selectChip(this)">결로</div>
-          <div class="d-chip" onclick="selectChip(this)">기타</div>
+          <div class="d-chip selected" onclick="this.classList.toggle('selected')">누수</div>
+          <div class="d-chip" onclick="this.classList.toggle('selected')">균열</div>
+          <div class="d-chip" onclick="this.classList.toggle('selected')">파손</div>
+          <div class="d-chip" onclick="this.classList.toggle('selected')">결로</div>
+          <div class="d-chip" onclick="this.classList.toggle('selected')">기타</div>
         </div>
         <label class="form-label">사진 첨부 <span style="color:var(--sub);font-weight:400">(최대 10장)</span></label>
-        <div class="photo-grid">
-          <div class="photo-slot filled" style="background:#d4e8f2;border:none;font-size:22px">🏠</div>
-          <div class="photo-slot filled" style="background:#dae5ed;border:none;font-size:22px">💧</div>
-          <div class="photo-slot filled" style="background:#e2e8f0;border:none;font-size:22px">📷</div>
+        <div class="photo-grid" id="photoGrid">
+          <div class="photo-slot filled">🏠</div>
+          <div class="photo-slot filled">💧</div>
+          <div class="photo-slot filled">📷</div>
           <div class="photo-slot" onclick="addPhoto()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#D1D5DB" stroke-width="1.5"/><path d="M12 8v8M8 12h8" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#D1D5DB" stroke-width="1.5"/><path d="M12 8v8M8 12h8" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round"/></svg>
             추가
           </div>
         </div>
-        <div class="photo-count">3/10장 등록됨</div>
+        <div class="photo-count" id="photoCount">3 / 10장 등록됨</div>
         <div class="tip-box">💡 전경 사진 1장 + 근접 사진을 함께 첨부하면 AI 분류 정확도가 높아집니다.</div>
       </div>
-      <button class="next-btn" onclick="goScreen('s-analyzing')">AI 분류 시작하기 →</button>
+      <button class="next-btn" onclick="nav('s-analyzing')">AI 분류 시작하기 →</button>
     </div>
 
     <!-- M3: 분석 중 -->
-    <div class="screen" id="s-analyzing" style="align-items:center;justify-content:center;padding-bottom:80px">
+    <div class="screen" id="s-analyzing" style="justify-content:center">
       <div class="analyzing-wrap">
         <div class="ai-orb">
-          <svg viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="10" stroke="white" stroke-width="2"/><path d="M22 12v4M22 28v4M12 22h4M28 22h4M15.5 15.5l2.8 2.8M25.7 25.7l2.8 2.8M25.7 15.5l-2.8 2.8M15.5 25.7l2.8 2.8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="42" height="42" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="9" stroke="white" stroke-width="1.8"/><path d="M21 11v4M21 27v4M11 21h4M27 21h4M14.5 14.5l2.8 2.8M24.7 24.7l2.8 2.8M24.7 14.5l-2.8 2.8M14.5 24.7l2.8 2.8" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
         </div>
-        <div>
-          <div class="analyzing-title">AI 분석 중</div>
-          <div class="analyzing-sub" style="margin-top:4px">잠시만 기다려 주세요</div>
+        <div style="text-align:center">
+          <div style="font-size:20px;font-weight:900">AI 분석 중</div>
+          <div style="font-size:13px;color:var(--sub);margin-top:4px" id="analyzeStatus">사진 품질을 검사하고 있습니다</div>
         </div>
         <div class="prog-wrap">
-          <div class="prog-label" id="progPct">65%</div>
-          <div class="prog-track"><div class="prog-fill" id="progFill" style="width:65%"></div></div>
+          <div class="prog-label" id="progPct">0%</div>
+          <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
         </div>
         <div class="checklist">
-          <div class="check-item"><div class="check-icon check-done">✓</div><span>사진 품질 검사 완료</span></div>
-          <div class="check-item"><div class="check-icon check-done">✓</div><span>피해 부위 탐지 완료</span></div>
-          <div class="check-item"><div class="check-icon check-done">✓</div><span>시공 하자 여부 분석 완료</span></div>
-          <div class="check-item"><div class="check-icon check-active" id="c4">⋯</div><span style="color:var(--blue);font-weight:600">법률·약관 검토 중</span></div>
-          <div class="check-item"><div class="check-icon check-pending">○</div><span style="color:var(--sub)">유형 판별 대기</span></div>
+          <div class="check-item" id="ci1"><div class="check-icon c-pending" id="ck1">○</div><span id="cl1" style="color:var(--sub)">사진 품질 검사</span></div>
+          <div class="check-item" id="ci2"><div class="check-icon c-pending" id="ck2">○</div><span id="cl2" style="color:var(--sub)">피해 부위 탐지</span></div>
+          <div class="check-item" id="ci3"><div class="check-icon c-pending" id="ck3">○</div><span id="cl3" style="color:var(--sub)">시공 하자 여부 분석</span></div>
+          <div class="check-item" id="ci4"><div class="check-icon c-pending" id="ck4">○</div><span id="cl4" style="color:var(--sub)">법률·약관 검토</span></div>
+          <div class="check-item" id="ci5"><div class="check-icon c-pending" id="ck5">○</div><span id="cl5" style="color:var(--sub)">유형 판별</span></div>
         </div>
-        <button class="next-btn" style="width:200px;margin:0" onclick="goScreen('s-result-c')">결과 보기 (데모)</button>
       </div>
     </div>
 
     <!-- M4: TYPE A 결과 -->
-    <div class="screen" id="s-result-ab">
+    <div class="screen" id="s-result-a">
       <div class="result-header">
-        <div class="result-icon result-a-icon">⚠️</div>
-        <div class="result-title">분류 결과</div>
-        <div class="result-sub">AI가 하자 유형을 판별했습니다</div>
+        <div class="result-icon" style="background:#FEF3C7">⚠️</div>
+        <div class="result-title">TYPE A — 하자 처리</div>
+        <div class="result-sub">시공상 하자로 판단되었습니다</div>
+        <div class="confidence">신뢰도 91%</div>
       </div>
-      <div class="card">
+      <div class="m-card">
         <div class="card-pad">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <span class="type-badge type-a" style="font-size:12px;padding:4px 12px">TYPE A — 하자 처리</span>
-            <span class="confidence">신뢰도 91%</span>
-          </div>
           <div style="font-size:14px;font-weight:700;margin-bottom:10px">AI 판단 근거</div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <div class="reason-row"><div class="reason-dot"></div><div class="reason-text">균열 폭 0.8mm — 허용 한계(0.3mm) 초과</div></div>
-            <div class="reason-row"><div class="reason-dot"></div><div class="reason-text">하자담보 기간 잔여 5년 1개월 (소송 적격)</div></div>
-            <div class="reason-row"><div class="reason-dot"></div><div class="reason-text">건축 4.9년차 / 주요 구조부 균열</div></div>
+          <div class="reason-row"><div class="reason-dot" style="background:var(--amber)"></div><div class="reason-text">균열 폭 0.8mm — 허용 한계(0.3mm) 초과</div></div>
+          <div class="reason-row"><div class="reason-dot" style="background:var(--amber)"></div><div class="reason-text">수직 관통균열 — 전단 변형 구조적 하자 패턴</div></div>
+          <div class="reason-row"><div class="reason-dot" style="background:var(--amber)"></div><div class="reason-text">하자담보 기간 잔여 5년 1개월 (소송 적격)</div></div>
+          <div style="margin-top:4px">
+            <div style="font-size:11px;font-weight:700;color:var(--sub);margin-bottom:6px">유사 판례</div>
+            <div style="font-size:12px;color:var(--sub);line-height:1.7">대법원 2019다287231 — 외벽 균열 시공사 귀책 인정<br>서울고법 2021나38421 — 동일 패턴 손해배상 인용</div>
           </div>
           <div style="background:#FEF3C7;border-radius:10px;padding:12px;margin-top:12px;font-size:12px;color:#92400E;line-height:1.6">
             📌 보험 처리 전 하자보수 청구가 우선됩니다. 법무법인 황해에서 소송·협의 안내를 드립니다.
           </div>
-          <button class="action-btn action-primary" style="margin-top:12px" onclick="alert('법무법인 황해 연결 — 데모')">법무법인 연결하기</button>
-          <button class="action-btn action-secondary" style="margin-top:0;border:1.5px solid var(--border);background:var(--bg)" onclick="alert('이의 신청 — 데모')">이의 신청하기</button>
         </div>
       </div>
-      <div class="card" style="margin-bottom:16px">
+      <button class="next-btn" onclick="showToast('법무법인 황해 연결 요청이 접수되었습니다')">법무법인 연결하기</button>
+      <button class="next-btn secondary" onclick="nav('s-objection')">이의 신청하기</button>
+    </div>
+
+    <!-- M4b: TYPE B 결과 -->
+    <div class="screen" id="s-result-ab">
+      <div class="result-header">
+        <div class="result-icon" style="background:#FEE2E2">🚫</div>
+        <div class="result-title">TYPE B — 면책 처리</div>
+        <div class="result-sub">점유자 과실로 판단되었습니다</div>
+        <div class="confidence" style="background:#FEE2E2;color:#991B1B">신뢰도 95.8%</div>
+      </div>
+      <div class="m-card">
         <div class="card-pad">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-            <span class="type-badge type-b" style="font-size:12px;padding:4px 12px">TYPE B — 면책 처리</span>
+          <div style="font-size:14px;font-weight:700;margin-bottom:10px">AI 판단 근거</div>
+          <div class="reason-row"><div class="reason-dot" style="background:var(--red)"></div><div class="reason-text">세탁기 배수 호스 연결부 이탈 흔적 확인</div></div>
+          <div class="reason-row"><div class="reason-dot" style="background:var(--red)"></div><div class="reason-text">외부 충격 없이 점유자 부주의로 인한 배수 불량 패턴</div></div>
+          <div class="reason-row"><div class="reason-dot" style="background:var(--red)"></div><div class="reason-text">공작물 책임(민법 758조) '설치·관리 하자' 해당 없음</div></div>
+          <div style="background:#FEF2F2;border-radius:10px;padding:12px;margin-top:12px">
+            <div style="font-size:11px;font-weight:700;color:var(--red);margin-bottom:4px">적용 약관</div>
+            <div style="font-size:12px;color:#991B1B;line-height:1.6">보험약관 제4조 제2항 제3호 — 피보험자 또는 점유자의 고의·과실</div>
           </div>
-          <div style="font-size:12px;color:var(--sub);line-height:1.6">점유자 과실 확인 시 법률 의견서가 자동 생성됩니다.</div>
-          <button class="action-btn action-secondary" style="margin-top:10px;border:1.5px solid var(--border);background:var(--bg)" onclick="alert('의견서 수령 — 데모')">의견서 수령 신청</button>
         </div>
       </div>
+      <button class="next-btn" onclick="nav('s-opinion')">법률 의견서 수령 신청</button>
+      <button class="next-btn secondary" onclick="nav('s-objection')">이의 신청하기</button>
     </div>
 
     <!-- M5: TYPE C 결과 -->
     <div class="screen" id="s-result-c">
       <div class="result-header">
-        <div class="result-icon result-c-icon">✅</div>
-        <div class="result-title">분류 결과</div>
-        <div class="result-sub">TYPE C — 보험 지급 대상입니다</div>
-        <div class="confidence">신뢰도 97.1%</div>
+        <div class="result-icon" style="background:#DCFCE7">✅</div>
+        <div class="result-title">TYPE C — 보험 지급</div>
+        <div class="result-sub">정당한 보상 대상입니다</div>
+        <div class="confidence" style="background:#DCFCE7;color:#166534">신뢰도 97.1%</div>
       </div>
-      <div class="amount-big">607,850원</div>
-      <div class="amount-sub">AI 적산 산출 보험금 (표준노임단가 기준)</div>
-      <div style="text-align:center"><span class="time-badge">⚡ 산출 완료 6분 41초</span></div>
-      <div class="card">
+      <div style="text-align:center;padding-top:4px">
+        <div class="amount-big">607,850원</div>
+        <div style="font-size:12px;color:var(--sub);margin-top:4px">AI 적산 산출 보험금 (표준노임단가 기준)</div>
+        <span class="time-badge">⚡ 산출 완료 6분 41초</span>
+      </div>
+      <div class="m-card">
         <div class="card-pad">
           <div class="card-title">산출 근거 요약</div>
-          <div class="breakdown-row"><span>피해 범위</span><strong>천장 2.4㎡</strong></div>
-          <div class="breakdown-row"><span>주요 공종</span><strong>방수 + 재도장</strong></div>
-          <div class="breakdown-row"><span>업체 견적</span><strong>850,000원</strong></div>
-          <div class="breakdown-row"><span>AI 산출 적정가</span><strong>607,850원</strong></div>
-          <div class="saving-banner">
-            <span>📉 견적 대비 절감</span>
-            <strong>-28.5%</strong>
-          </div>
-          <div style="font-size:12px;color:var(--sub);margin-top:10px;line-height:1.6">손해사정사 승인 후 영업일 3일 이내 지급 예정</div>
-          <button class="action-btn action-primary" style="margin-top:12px" onclick="goScreen('s-detail')">산출 내역 상세 보기</button>
-          <button class="action-btn action-secondary" style="margin-top:0;border:1.5px solid var(--border);background:var(--bg)">청구 접수 완료</button>
+          <div class="row-line"><span>피해 범위</span><strong>천장 2.4㎡</strong></div>
+          <div class="row-line"><span>주요 공종</span><strong>방수 + 재도장</strong></div>
+          <div class="row-line"><span>업체 견적</span><strong>850,000원</strong></div>
+          <div class="row-line"><span>AI 산출 적정가</span><strong>607,850원</strong></div>
+          <div class="saving-banner"><span>📉 견적 대비 절감</span><strong>-28.5%</strong></div>
+          <div style="font-size:11px;color:var(--sub);margin-top:10px;line-height:1.6">손해사정사 승인 후 영업일 3일 이내 지급 예정</div>
         </div>
       </div>
+      <button class="next-btn" onclick="nav('s-detail')">산출 내역 상세 보기 →</button>
+      <button class="next-btn secondary" onclick="nav('s-complete')">청구 접수 완료</button>
     </div>
 
-    <!-- M6: 적산 내역 상세 -->
+    <!-- M6: 내역 상세 -->
     <div class="screen" id="s-detail">
-      <div class="card" style="margin-top:16px">
+      <div class="m-card" style="margin-top:16px">
         <div class="card-pad">
           <div class="card-title">공종별 내역 — CLM-2026-0247</div>
-          <div class="breakdown-row"><span>방수층 보수 (탄성도막 3.1㎡)</span><strong>79,100원</strong></div>
-          <div class="breakdown-row"><span>천장 재도장 (퍼티+도장 12.3㎡)</span><strong>124,700원</strong></div>
-          <div class="breakdown-row"><span>균열주입 (에폭시 4.7m)</span><strong>104,900원</strong></div>
-          <div class="breakdown-row"><span>간접비 (10.5%)</span><strong>32,400원</strong></div>
+          <div class="row-line"><span>방수층 보수 (탄성도막 3.1㎡)</span><strong>79,100원</strong></div>
+          <div class="row-line"><span>천장 재도장 (퍼티+도장 12.3㎡)</span><strong>124,700원</strong></div>
+          <div class="row-line"><span>균열주입 (에폭시 4.7m)</span><strong>104,900원</strong></div>
+          <div class="row-line"><span>간접비 (10.5%)</span><strong>32,400원</strong></div>
           <div style="height:1px;background:var(--navy);margin:4px 0"></div>
-          <div class="breakdown-row"><span style="font-weight:700">소계</span><strong>341,100원</strong></div>
-          <div class="breakdown-row"><span class="deduct">감가상각 차감</span><strong class="deduct">-60,150원</strong></div>
-          <div class="breakdown-row"><span class="deduct">자기부담금</span><strong class="deduct">-30,000원</strong></div>
-          <div class="breakdown-total"><span>최종 보험금</span><strong style="font-size:20px;color:var(--navy)">607,850원</strong></div>
-          <div class="saving-banner">
-            <span>업체 견적 850,000원 대비</span>
-            <strong>242,150원 절감 (-28.5%)</strong>
-          </div>
+          <div class="row-line"><span style="font-weight:700">소계</span><strong>341,100원</strong></div>
+          <div class="row-line"><span class="deduct">감가상각 차감 (9.2년)</span><strong class="deduct">-60,150원</strong></div>
+          <div class="row-line"><span class="deduct">자기부담금</span><strong class="deduct">-30,000원</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;font-size:16px;font-weight:900"><span>최종 보험금</span><span style="color:var(--green)">607,850원</span></div>
+          <div class="saving-banner"><span>업체 견적 850,000원 대비</span><strong>242,150원 절감 (-28.5%)</strong></div>
         </div>
       </div>
-      <button class="next-btn" onclick="goScreen('s-complete')" style="background:var(--green)">지급 확정 완료 확인</button>
-      <button class="next-btn" style="background:var(--bg);color:var(--navy);border:1.5px solid var(--border);margin-top:0" onclick="alert('이의 신청 — 데모')">이의 신청하기</button>
+      <button class="next-btn green" onclick="nav('s-complete')">지급 확정 완료 확인</button>
+      <button class="next-btn red-light" onclick="nav('s-objection')">이의 신청하기</button>
     </div>
 
     <!-- M7: 완료 -->
     <div class="screen" id="s-complete" style="align-items:center">
       <div class="complete-wrap">
         <div class="complete-circle">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
         </div>
         <div>
-          <div style="font-size:14px;color:var(--sub);margin-bottom:6px">보험금 지급 확정</div>
-          <div class="complete-amount">607,850원</div>
-          <div class="complete-label">영업일 3일 이내 입금 예정</div>
+          <div style="font-size:13px;color:var(--sub);margin-bottom:6px">보험금 지급 확정</div>
+          <div style="font-size:38px;font-weight:900;color:var(--navy)">607,850원</div>
+          <div style="font-size:13px;color:var(--sub);margin-top:4px">영업일 3일 이내 입금 예정</div>
         </div>
-        <div style="width:100%;max-width:300px">
-          <div class="info-row"><span class="info-label">청구번호</span><span class="info-value">CLM-2026-0247</span></div>
-          <div class="info-row"><span class="info-label">총 처리 시간</span><span class="info-value" style="color:var(--green)">22분</span></div>
-          <div class="info-row"><span class="info-label">승인자</span><span class="info-value">김지수 손해사정사</span></div>
+        <div style="width:100%;max-width:300px;margin-top:8px">
+          <div class="info-row"><span style="color:var(--sub)">청구번호</span><span style="font-weight:700">CLM-2026-0247</span></div>
+          <div class="info-row"><span style="color:var(--sub)">총 처리 시간</span><span style="font-weight:700;color:var(--green)">22분</span></div>
+          <div class="info-row"><span style="color:var(--sub)">승인자</span><span style="font-weight:700">김지수 손해사정사</span></div>
         </div>
         <div style="font-size:12px;color:var(--sub);text-align:center">입금 완료 후 SMS 알림이 발송됩니다.</div>
-        <button class="home-btn" onclick="goScreen('s-home')">홈으로 돌아가기</button>
+        <button onclick="nav('s-home')" style="background:var(--navy);color:#fff;border:none;border-radius:12px;padding:14px 40px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px">홈으로 돌아가기</button>
+      </div>
+    </div>
+
+    <!-- 이의신청 -->
+    <div class="screen" id="s-objection">
+      <div class="m-card" style="margin-top:20px">
+        <div class="card-pad">
+          <div style="text-align:center;padding:10px 0 14px">
+            <div style="font-size:36px;margin-bottom:8px">📝</div>
+            <div style="font-size:18px;font-weight:900;margin-bottom:8px">이의 신청</div>
+            <div style="font-size:13px;color:var(--sub);line-height:1.6">AI 분류 결과에 이의가 있으시면 아래 내용을 작성해 주세요. 황해 법무팀이 직접 검토합니다.</div>
+          </div>
+          <textarea style="width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px;font-size:13px;font-family:inherit;resize:none;min-height:100px;margin-bottom:12px" placeholder="이의 신청 사유를 입력해 주세요..."></textarea>
+          <button class="next-btn" style="margin:0" onclick="showToast('이의 신청이 접수되었습니다. 3영업일 내 연락드립니다.')">이의 신청 접수</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 법률 의견서 -->
+    <div class="screen" id="s-opinion">
+      <div class="m-card" style="margin-top:20px">
+        <div class="card-pad">
+          <div style="font-size:14px;font-weight:700;margin-bottom:14px">법률 의견서 수령 신청</div>
+          <div style="background:#F9FAFB;border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12px;line-height:1.8;color:var(--text);margin-bottom:14px">
+            <strong>법률 의견서</strong><br>
+            사건: CLM-2026-0245<br>
+            청구인: 홍○○<br><br>
+            본 건은 보험약관 제4조 제2항 제3호에 따라 면책 대상으로 판단됩니다. 세탁기 배수 관리 부주의로 인한 사고이며, 공작물 책임(민법 758조) 적용 요건에 해당하지 않습니다.<br><br>
+            <span style="color:var(--sub)">법무법인 더 에이치 황해 | 032-251-1000</span>
+          </div>
+          <button class="next-btn" style="margin:0" onclick="showToast('법률 의견서가 이메일로 발송되었습니다')">이메일로 수령하기</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 내역 목록 -->
+    <div class="screen" id="s-history">
+      <div class="m-card" style="margin-top:16px">
+        <div class="card-pad">
+          <div class="card-title">전체 청구 내역</div>
+          <div class="history-item" onclick="nav('s-detail')">
+            <span class="type-badge badge-c">TYPE C</span>
+            <div class="history-info"><div class="history-title">거실 천장 누수</div><div class="history-sub">2026-03-14</div></div>
+            <div class="history-amount" style="color:var(--green)">607,850원</div>
+          </div>
+          <div class="history-item" onclick="nav('s-result-ab')">
+            <span class="type-badge badge-b">TYPE B</span>
+            <div class="history-info"><div class="history-title">창문 파손</div><div class="history-sub">2026-02-28</div></div>
+            <div class="history-amount" style="color:var(--sub);font-size:11px">면책</div>
+          </div>
+          <div class="history-item" onclick="nav('s-result-a')">
+            <span class="type-badge badge-a">TYPE A</span>
+            <div class="history-info"><div class="history-title">외벽 균열</div><div class="history-sub">2026-01-20</div></div>
+            <div class="history-amount" style="color:var(--amber);font-size:11px">소송 진행</div>
+          </div>
+        </div>
       </div>
     </div>
 
   </div><!-- /screens -->
 
-  <!-- 하단 탭바 -->
+  <!-- 탭바 -->
   <div class="tabbar">
-    <div class="tab active" id="tab-home" onclick="tabTo('home')">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>홈
+    <div class="tab active" id="tab-home" onclick="tabNav('s-home','tab-home')">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" stroke="currentColor" stroke-width="1.8"/></svg>홈
     </div>
-    <div class="tab" id="tab-claim" onclick="goScreen('s-upload')">
+    <div class="tab" id="tab-claim" onclick="tabNav('s-upload','tab-claim')">
       <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v8M8 12h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>청구
     </div>
-    <div class="tab" id="tab-history" onclick="tabTo('history')">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>내역
+    <div class="tab" id="tab-history" onclick="tabNav('s-history','tab-history')">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="1.8"/></svg>내역
     </div>
-    <div class="tab" id="tab-settings">
-      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>설정
+    <div class="tab" id="tab-settings" onclick="tabNav('s-home','tab-settings')">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="1.8"/></svg>설정
     </div>
   </div>
+
+  <!-- 토스트 -->
+  <div class="toast" id="toast"></div>
 </div>
 
 <script>
-const screens={
-  'home':'s-home','upload':'s-upload','analyzing':'s-analyzing',
-  'result-ab':'s-result-ab','result-c':'s-result-c','detail':'s-detail','complete':'s-complete'
-};
-const headerTitles={
+// ── 네비게이션 ──
+const titles = {
   's-home':'아파트집사 보험','s-upload':'보험금 청구','s-analyzing':'AI 분석 중',
-  's-result-ab':'분류 결과','s-result-c':'분류 결과','s-detail':'산출 내역 상세','s-complete':'청구 완료'
+  's-result-a':'분류 결과','s-result-ab':'분류 결과','s-result-c':'분류 결과',
+  's-detail':'산출 내역 상세','s-complete':'청구 완료','s-objection':'이의 신청',
+  's-opinion':'법률 의견서','s-history':'청구 내역'
 };
-const stepInfo={
-  's-upload':{show:true,label:'STEP 2 / 4 — 피해 사진 등록',width:'50%'},
-  's-analyzing':{show:true,label:'STEP 3 / 4 — AI 자동 분류',width:'75%'},
-  's-result-ab':{show:true,label:'STEP 4 / 4 — 결과 확인',width:'100%'},
-  's-result-c':{show:true,label:'STEP 4 / 4 — 결과 확인',width:'100%'},
-  's-detail':{show:true,label:'산출 내역 상세',width:'100%'},
+const steps = {
+  's-upload':{label:'STEP 2 / 4 — 피해 사진 등록',w:'50%'},
+  's-analyzing':{label:'STEP 3 / 4 — AI 자동 분류',w:'75%'},
+  's-result-a':{label:'STEP 4 / 4 — 결과 확인',w:'100%'},
+  's-result-ab':{label:'STEP 4 / 4 — 결과 확인',w:'100%'},
+  's-result-c':{label:'STEP 4 / 4 — 결과 확인',w:'100%'},
+  's-detail':{label:'산출 내역 상세',w:'100%'},
 };
+const homeScreens = ['s-home','s-history'];
+let stack = [];
+let current = 's-home';
 
-function goScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.getElementById('headerTitle').textContent=headerTitles[id]||'아파트집사 보험';
-  const si=stepInfo[id];
-  if(si){
-    document.getElementById('stepBar').style.display='block';
-    document.getElementById('stepLabel').textContent=si.label;
-    document.getElementById('stepFill').style.width=si.width;
-  }else{
-    document.getElementById('stepBar').style.display='none';
+  document.getElementById('headerTitle').textContent = titles[id] || '';
+  const step = steps[id];
+  const sb = document.getElementById('stepBar');
+  if (step) {
+    sb.style.display = 'block';
+    document.getElementById('stepLabel').textContent = step.label;
+    document.getElementById('stepFill').style.width = step.w;
+  } else {
+    sb.style.display = 'none';
   }
-  // 분석 중 자동 진행
-  if(id==='s-analyzing') runAnalysis();
+  const backBtn = document.getElementById('backBtn');
+  backBtn.style.visibility = stack.length > 0 ? 'visible' : 'hidden';
+  current = id;
 }
-function tabTo(tab){
-  if(tab==='home') goScreen('s-home');
-  else if(tab==='history') goScreen('s-detail');
-}
-function selectLoc(el){document.querySelectorAll('.loc-chip').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');}
-function selectChip(el){el.classList.toggle('selected');}
-function addPhoto(){alert('카메라/갤러리 — 데모');}
 
-function runAnalysis(){
-  const fill=document.getElementById('progFill');
-  const pct=document.getElementById('progPct');
-  let v=65;
-  const t=setInterval(()=>{
-    v=Math.min(v+1,100);
-    fill.style.width=v+'%';
-    pct.textContent=v+'%';
-    if(v>=100){
-      clearInterval(t);
-      document.getElementById('c4').textContent='✓';
-      document.getElementById('c4').className='check-icon check-done';
-    }
-  },50);
+function nav(id) {
+  if (id === current) return;
+  stack.push(current);
+  if (id === 's-analyzing') {
+    showScreen(id);
+    startAnalysis();
+  } else {
+    showScreen(id);
+  }
 }
+
+function goBack() {
+  if (stack.length === 0) return;
+  const prev = stack.pop();
+  showScreen(prev);
+}
+
+function tabNav(screenId, tabId) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  stack = [];
+  showScreen(screenId);
+}
+
+// ── 분석 애니메이션 ──
+const checkSteps = [
+  {id:'ck1',label:'cl1',text:'사진 품질 검사 완료',status:'사진 품질을 검사하고 있습니다',pct:20},
+  {id:'ck2',label:'cl2',text:'피해 부위 탐지 완료',status:'피해 부위를 탐지하고 있습니다',pct:40},
+  {id:'ck3',label:'cl3',text:'시공 하자 여부 분석 완료',status:'시공 하자 여부를 분석하고 있습니다',pct:60},
+  {id:'ck4',label:'cl4',text:'법률·약관 검토 완료',status:'법률 및 약관을 검토하고 있습니다',pct:80},
+  {id:'ck5',label:'cl5',text:'유형 판별 완료',status:'하자 유형을 판별하고 있습니다',pct:100},
+];
+
+function startAnalysis() {
+  // 초기화
+  checkSteps.forEach(s => {
+    const ck = document.getElementById(s.id);
+    const cl = document.getElementById(s.label);
+    ck.className = 'check-icon c-pending';
+    ck.textContent = '○';
+    cl.style.color = 'var(--sub)';
+    cl.style.fontWeight = '';
+  });
+  document.getElementById('progFill').style.width = '0%';
+  document.getElementById('progPct').textContent = '0%';
+  document.getElementById('analyzeStatus').textContent = '사진 품질을 검사하고 있습니다';
+
+  let step = 0;
+  let pct = 0;
+
+  function tick() {
+    const target = checkSteps[step] ? checkSteps[step].pct : 100;
+    pct = Math.min(pct + 2, target);
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progPct').textContent = pct + '%';
+
+    if (pct >= target && step < checkSteps.length) {
+      const s = checkSteps[step];
+      const ck = document.getElementById(s.id);
+      const cl = document.getElementById(s.label);
+      ck.className = 'check-icon c-done';
+      ck.textContent = '✓';
+      cl.textContent = s.text;
+      cl.style.color = 'var(--text)';
+      cl.style.fontWeight = '600';
+      if (step + 1 < checkSteps.length) {
+        document.getElementById('analyzeStatus').textContent = checkSteps[step + 1].status;
+      }
+      step++;
+    }
+
+    if (pct < 100) {
+      setTimeout(tick, 60);
+    } else {
+      // 완료 → 자동 이동 (1초 후)
+      setTimeout(() => {
+        stack.push('s-analyzing');
+        showScreen('s-result-c');
+      }, 800);
+    }
+  }
+  setTimeout(tick, 300);
+}
+
+// ── 유틸 ──
+function toggleLoc(el) {
+  document.querySelectorAll('.loc-chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+let photoCount = 3;
+function addPhoto() {
+  if (photoCount >= 10) { showToast('최대 10장까지 첨부 가능합니다'); return; }
+  photoCount++;
+  const grid = document.getElementById('photoGrid');
+  const addSlot = grid.querySelector('.photo-slot:not(.filled)');
+  const newFilled = document.createElement('div');
+  newFilled.className = 'photo-slot filled';
+  newFilled.textContent = ['🖼️','📸','🔍','🏠','💧'][photoCount % 5];
+  grid.insertBefore(newFilled, addSlot);
+  document.getElementById('photoCount').textContent = photoCount + ' / 10장 등록됨';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// 시계
+function updateClock() {
+  const now = new Date();
+  document.getElementById('clock').textContent =
+    now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+}
+setInterval(updateClock, 30000);
 </script>
 </body>
 </html>
