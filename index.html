@@ -211,8 +211,8 @@ html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:#e4e8
           </div>
           <div class="h-item" onclick="nav('s-result-a')">
             <div class="h-dot" style="background:var(--amber)"></div>
-            <div class="h-info"><div class="h-title">외벽 균열</div><div class="h-sub">2026-01-20 · TYPE A · 진행 중</div></div>
-            <div class="h-right"><div class="h-amount" style="color:var(--amber);font-size:12px">소송 이관</div><div class="h-status">진행 중</div></div>
+            <div class="h-info"><div class="h-title">외벽 균열</div><div class="h-sub">2026-01-20 · 하자소송 증거자료</div></div>
+            <div class="h-right"><div class="h-amount" style="color:var(--amber);font-size:12px">소송 진행 중</div><div class="h-status">증거 추가됨</div></div>
           </div>
         </div>
       </div>
@@ -264,25 +264,51 @@ html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:#e4e8
     </div>
     <div class="screen" id="s-result-a">
       <div style="padding:16px 16px 0">
-        <div class="result-chip a">TYPE A — 시공상 하자</div>
-        <div style="font-size:18px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px">소송 전환 안내</div>
-        <div style="font-size:13px;color:var(--s);margin-bottom:12px">시공상 하자로 판단되어 법무법인 황해로 이관됩니다</div>
+        <div class="result-chip a">TYPE A — 하자소송 증거자료</div>
+        <div style="font-size:18px;font-weight:700;letter-spacing:-.4px;margin-bottom:4px">보험 청구 불가 — 하자소송으로 처리</div>
+        <div style="font-size:13px;color:var(--s);margin-bottom:10px">시공상 하자는 화재보험 면책 사항입니다.<br>공동주택관리법 제37조에 따라 시공사에 손해배상을 청구합니다.</div>
         <div class="conf-badge">신뢰도 91%</div>
       </div>
+      <!-- 약관 근거 박스 -->
       <div class="m-card">
-        <div class="card-head">AI 판단 근거</div>
+        <div class="card-head">보험 면책 근거</div>
         <div class="card-body" style="padding:10px 16px 12px">
+          <div style="background:var(--al);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;padding:10px 12px;font-size:12px;color:var(--t);line-height:1.7;margin-bottom:10px">
+            <div style="font-weight:700;color:var(--amber);margin-bottom:4px">화재보험 보통약관 면책 조항</div>
+            "설계·재료·공사상의 결함(시공상 하자)으로 생긴 손해는 보상하지 않습니다"
+          </div>
           <div class="reason-block">
-            <div class="r-item"><div class="r-bar" style="background:var(--amber)"></div><div>균열 폭 0.8mm — 허용 한계(0.3mm) 초과</div></div>
-            <div class="r-item"><div class="r-bar" style="background:var(--amber)"></div><div>수직 관통균열 — 전단 변형 구조적 하자 패턴</div></div>
+            <div class="r-item"><div class="r-bar" style="background:var(--amber)"></div><div>균열 폭 0.8mm — 허용 한계(0.3mm) 초과, 공사상 결함 해당</div></div>
+            <div class="r-item"><div class="r-bar" style="background:var(--amber)"></div><div>수직 관통균열 — 전단 변형 구조적 하자 패턴 확인</div></div>
             <div class="r-item"><div class="r-bar" style="background:var(--amber)"></div><div>하자담보 기간 잔여 5년 1개월 (소송 적격)</div></div>
           </div>
-          <div style="margin-top:10px"><div style="font-size:11px;font-weight:600;color:var(--s);margin-bottom:6px;text-transform:uppercase;letter-spacing:.3px">유사 판례</div><div style="font-size:12px;color:var(--s);line-height:1.7;background:var(--bg);border-radius:6px;padding:8px 10px">대법원 2019다287231 — 외벽 균열 시공사 귀책 인정<br>서울고법 2021나38421 — 동일 패턴 손해배상 인용</div></div>
-          <div class="notice-box">보험 처리 전 하자보수 청구가 우선됩니다. 법무법인 황해 소송팀에서 직접 안내해 드립니다.</div>
         </div>
       </div>
-      <button class="main-btn" onclick="showToast('법무법인 황해 연결 요청이 접수되었습니다')">법무법인 황해 연결</button>
-      <button class="main-btn sub-btn" onclick="nav('s-objection')">이의 신청</button>
+      <!-- 단지 하자소송 연계 -->
+      <div class="m-card">
+        <div class="card-head">단지 하자소송 연계</div>
+        <div class="card-body" style="padding:10px 16px 12px">
+          <div style="background:var(--pl);border-radius:8px;padding:10px 13px;margin-bottom:10px;border:1px solid #c7d2fe">
+            <div style="font-size:11px;font-weight:700;color:var(--p);margin-bottom:4px">헬리오시티 단지 하자소송 진행 중</div>
+            <div style="font-size:12px;color:var(--t);line-height:1.6">이 단지는 현재 시공사(○○건설)를 상대로 하자소송이 진행 중입니다. 이번 사진·측정값은 <strong>소송 증거자료</strong>로 자동 추가됩니다.</div>
+          </div>
+          <div class="kv" style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--b);font-size:13px">
+            <span style="color:var(--s)">소송 진행 단계</span><span style="font-weight:600;color:var(--p)">내용증명 발송 중</span>
+          </div>
+          <div class="kv" style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--b);font-size:13px">
+            <span style="color:var(--s)">청구 상대</span><span style="font-weight:600">○○건설(시공사)</span>
+          </div>
+          <div class="kv" style="display:flex;justify-content:space-between;padding:7px 0;font-size:13px">
+            <span style="color:var(--s)">구상권 예상 청구액</span><span style="font-weight:700;color:var(--p)">단지 합산 약 38억원</span>
+          </div>
+          <div style="margin-top:8px;background:var(--gl);border-radius:6px;padding:8px 11px;font-size:12px;color:var(--green);line-height:1.6">본 건 증거자료가 소송 패키지에 추가되면 법무법인 황해에서 개별 통보드립니다.</div>
+        </div>
+      </div>
+      <button class="main-btn" onclick="showToast('증거자료가 법무법인 황해 하자소송 패키지에 추가되었습니다')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="white" stroke-width="1.6"/><path d="M12 11v6M9 14l3 3 3-3" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+        증거자료로 소송 패키지에 추가
+      </button>
+      <button class="main-btn sub-btn" onclick="nav('s-objection')">AI 분류 이의 신청</button>
     </div>
     <div class="screen" id="s-result-ab">
       <div style="padding:16px 16px 0">
@@ -389,7 +415,7 @@ html,body{min-height:100%;font-family:'Noto Sans KR',sans-serif;background:#e4e8
         <div class="card-body">
           <div class="h-item" onclick="nav('s-detail')"><div class="h-dot" style="background:var(--green)"></div><div class="h-info"><div class="h-title">거실 천장 누수</div><div class="h-sub">2026-03-14 · TYPE C</div></div><div class="h-right"><div class="h-amount" style="color:var(--green)">607,850원</div></div></div>
           <div class="h-item" onclick="nav('s-result-ab')"><div class="h-dot" style="background:var(--red)"></div><div class="h-info"><div class="h-title">창문 파손</div><div class="h-sub">2026-02-28 · TYPE B</div></div><div class="h-right"><div class="h-amount" style="color:var(--red);font-size:12px">면책</div></div></div>
-          <div class="h-item" onclick="nav('s-result-a')"><div class="h-dot" style="background:var(--amber)"></div><div class="h-info"><div class="h-title">외벽 균열</div><div class="h-sub">2026-01-20 · TYPE A</div></div><div class="h-right"><div class="h-amount" style="color:var(--amber);font-size:12px">소송 중</div></div></div>
+          <div class="h-item" onclick="nav('s-result-a')"><div class="h-dot" style="background:var(--amber)"></div><div class="h-info"><div class="h-title">외벽 균열</div><div class="h-sub">2026-01-20 · 하자소송 증거자료</div></div><div class="h-right"><div class="h-amount" style="color:var(--amber);font-size:12px">소송 진행 중</div></div></div>
         </div>
       </div>
     </div>
